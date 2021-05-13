@@ -1,4 +1,4 @@
-package com.hjc.bigdata.Hadoop.MapReduce.FlowbeanSort2;
+package com.hjc.bigdata.Hadoop.MapReduce.Flowbean.FlowbeanSort2;
 
 import org.apache.hadoop.io.WritableComparator;
 

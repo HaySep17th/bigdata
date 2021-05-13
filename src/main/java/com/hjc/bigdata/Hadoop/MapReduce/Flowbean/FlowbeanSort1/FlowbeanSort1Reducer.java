@@ -1,4 +1,4 @@
-package com.hjc.bigdata.Hadoop.MapReduce.FlowbeanSort1;
+package com.hjc.bigdata.Hadoop.MapReduce.Flowbean.FlowbeanSort1;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;

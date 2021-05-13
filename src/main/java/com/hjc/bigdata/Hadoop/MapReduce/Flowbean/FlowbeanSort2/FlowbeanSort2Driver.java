@@ -1,4 +1,4 @@
-package com.hjc.bigdata.Hadoop.MapReduce.FlowbeanSort2;
+package com.hjc.bigdata.Hadoop.MapReduce.Flowbean.FlowbeanSort2;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -45,6 +45,7 @@ public class FlowbeanSort2Driver {
         FileInputFormat.setInputPaths(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputPath);
 
+        // 设置使用自定义的比较器
         job.setSortComparatorClass(MyComparator.class);
 
         job.waitForCompletion(true);
