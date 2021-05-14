@@ -12,6 +12,10 @@ import java.io.IOException;
  * @date : 2021/5/13; 20:51
  * @Version : 1.0
  */
+/*
+如果自定义的Key类型只实现了Writable借口，没有实现WritableComparator借口，需要提供自定义的比较器
+    自定义比较器的方法之一：实现RawComparator接口
+ */
 public class Flowbean implements Writable {
 
     private long upFlow;

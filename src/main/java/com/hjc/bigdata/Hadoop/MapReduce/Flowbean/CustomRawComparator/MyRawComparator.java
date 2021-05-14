@@ -17,6 +17,7 @@ public class MyRawComparator implements RawComparator <Flowbean> {
     private Flowbean key2 = new Flowbean();
     private DataInputBuffer buffer = new DataInputBuffer();
 
+    //负责从缓冲区中解析出要比较的两个Key对象，调用compare（）对两个对象进行比较
     @Override
     public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
         try {

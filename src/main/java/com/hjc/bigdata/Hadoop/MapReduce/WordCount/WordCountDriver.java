@@ -30,10 +30,10 @@ public class WordCountDriver {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException, URISyntaxException {
 
-        //Path inputPath = new Path("/Users/apple/Downloads/HarryPotter.txt");
-        //Path outputPath = new Path("/Users/apple/Downloads/hadoop/output/wprdcount/");
-        Path inputPath = new Path("/wc");
-        Path outputPath = new Path("/output/wprdcount/");
+        Path inputPath = new Path("/Users/apple/Downloads/hadoop/mrinput/wordcount/HarryPotter.txt");
+        Path outputPath = new Path("/Users/apple/Downloads/hadoop/output/wprdcount/");
+//        Path inputPath = new Path("/wc");
+//        Path outputPath = new Path("/output/wprdcount/");
 
         //作为整个Job的配置
         Configuration conf = new Configuration();
@@ -58,7 +58,7 @@ public class WordCountDriver {
         Job job = Job.getInstance(conf);
 
         //告诉nn运行时，MR中job所在的jar包在哪
-        job.setJar("hdfs-1.0-SNAPSHOT.jar");
+        //job.setJar("hdfs-1.0-SNAPSHOT.jar");
 
         job.setJobName("wordcount");
         /*
