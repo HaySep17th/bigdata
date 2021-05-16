@@ -1,4 +1,4 @@
-package com.hjc.bigdata.Hadoop.MapReduce.CombineInputFormat;
+package com.hjc.bigdata.Hadoop.MapReduce.CostomInputFormat.CombineInputFormat;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;

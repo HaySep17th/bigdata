@@ -1,7 +1,5 @@
-package com.hjc.bigdata.Hadoop.MapReduce.CombineInputFormat;
+package com.hjc.bigdata.Hadoop.MapReduce.CostomInputFormat.CombineInputFormat;
 
-import com.hjc.bigdata.Hadoop.MapReduce.WordCount.WordCountMapper;
-import com.hjc.bigdata.Hadoop.MapReduce.WordCount.WordCountReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;

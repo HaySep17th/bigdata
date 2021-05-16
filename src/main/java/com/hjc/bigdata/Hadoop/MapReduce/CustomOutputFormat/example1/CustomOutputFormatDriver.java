@@ -1,9 +1,8 @@
-package com.hjc.bigdata.Hadoop.MapReduce.groupcompare;
+package com.hjc.bigdata.Hadoop.MapReduce.CustomOutputFormat.example1;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -11,15 +10,15 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * @Description : TODO
  * @author : hjc
- * @date : 2021/5/15; 21:53
+ * @date : 2021/5/16; 12:12
  * @Version : 1.0
  */
-public class OrderDriver {
+public class CustomOutputFormatDriver {
 
     public static void main(String[] args) throws Exception{
 
-        Path inputPath = new Path("/Users/apple/Downloads/hadoop/mrinput/groupcomparator/data.txt");
-        Path outputPath = new Path("/Users/apple/Downloads/hadoop/output/groupcomparator/");
+        Path inputPath = new Path("/Users/apple/Downloads/hadoop/mrinput/outputformat/data.txt");
+        Path outputPath = new Path("/Users/apple/Downloads/hadoop/output/outputformat/example1");
 
         Configuration conf = new Configuration();
 
@@ -30,21 +29,18 @@ public class OrderDriver {
         }
 
         Job job = Job.getInstance(conf);
-        job.setJobName("分组");
 
-        job.setMapperClass(OrderMapper.class);
-        job.setReducerClass(OrderReducer.class);
-
-        job.setOutputKeyClass(OrderBean.class);
-        job.setOutputValueClass(NullWritable.class);
+        job.setMapperClass(CustomOutputFormatMapper.class);
 
         FileInputFormat.setInputPaths(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputPath);
 
-        job.setGroupingComparatorClass(MyCpmparator2.class);
+        job.setOutputFormatClass(MyCustomOutputFormat.class);
+
+        job.setNumReduceTasks(0);
 
         job.waitForCompletion(true);
 
-    }
 
+    }
 }

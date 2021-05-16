@@ -1,4 +1,4 @@
-package com.hjc.bigdata.Hadoop.MapReduce.groupcompare;
+package com.hjc.bigdata.Hadoop.MapReduce.ReduceJoin;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -11,15 +11,14 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * @Description : TODO
  * @author : hjc
- * @date : 2021/5/15; 21:53
+ * @date : 2021/5/16; 15:18
  * @Version : 1.0
  */
-public class OrderDriver {
+public class ReduceJoinDriver {
 
-    public static void main(String[] args) throws Exception{
-
-        Path inputPath = new Path("/Users/apple/Downloads/hadoop/mrinput/groupcomparator/data.txt");
-        Path outputPath = new Path("/Users/apple/Downloads/hadoop/output/groupcomparator/");
+    public static void main(String[] args) throws Exception {
+        Path inputPath = new Path("/Users/apple/Downloads/hadoop/mrinput/reducejoin");
+        Path outputPath = new Path("/Users/apple/Downloads/hadoop/output/reducejoin");
 
         Configuration conf = new Configuration();
 
@@ -30,21 +29,19 @@ public class OrderDriver {
         }
 
         Job job = Job.getInstance(conf);
-        job.setJobName("分组");
+        job.setJobName("Reducer实现join");
 
-        job.setMapperClass(OrderMapper.class);
-        job.setReducerClass(OrderReducer.class);
+        job.setMapperClass(ReducerJoinMapper.class);
+        job.setReducerClass(ReducerJoinReducer.class);
 
-        job.setOutputKeyClass(OrderBean.class);
-        job.setOutputValueClass(NullWritable.class);
+        job.setOutputKeyClass(NullWritable.class);
+        job.setOutputValueClass(JoinBean.class);
 
-        FileInputFormat.setInputPaths(job, inputPath);
+        FileInputFormat.addInputPath(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputPath);
 
-        job.setGroupingComparatorClass(MyCpmparator2.class);
+        job.setPartitionerClass(ReduceJoinPartitioner.class);
 
         job.waitForCompletion(true);
-
     }
-
 }
