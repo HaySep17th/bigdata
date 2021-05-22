@@ -19,7 +19,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class TestZookeeperWatch {
 
-    private String connectString = "hp1:2181,hp2:2181";
+    private String connectString = "hp1:2181,hp2:2181,hp3:2181";
     private int sessionTimeOut = 6000;
     private ZooKeeper zooKeeper;
 
@@ -85,7 +85,7 @@ public class TestZookeeperWatch {
 
         //zooKeeper = new ZooKeeper(connectString, sessionTimeout, true)  会自动调用Before里面的process
         //是Connect线程调用
-        byte[] data = zooKeeper.getData("/data2", new Watcher() {
+        byte[] data = zooKeeper.getData("/ideaZK", new Watcher() {
 
             // 是Listener线程调用
             @Override
@@ -104,12 +104,12 @@ public class TestZookeeperWatch {
         cdl.await();
     }
 
-    //持续watch
+    //持续watch:知己而在回调方法中递归调用会导致观察者线程阻塞。
     @Test
     public void lsAndAlwaysWatch() throws Exception {
 
         //传入true,默认使用客户端自带的观察者
-        zooKeeper.getChildren("/data2",new Watcher() {
+        zooKeeper.getChildren("/ideaZK",new Watcher() {
 
             // process由listener线程调用，listener线程不能阻塞,阻塞后无法再调用process
             //当前线程自己设置的观察者
@@ -160,7 +160,7 @@ public class TestZookeeperWatch {
     public void lsAndAlwaysWatchCurrent() throws Exception {
 
         //传入true,默认使用客户端自带的观察者
-        zooKeeper.getChildren("/data2",new Watcher() {
+        zooKeeper.getChildren("/ideaZK",new Watcher() {
 
             // process由listener线程调用，listener线程不能阻塞,阻塞后无法再调用process
             //当前线程自己设置的观察者
@@ -168,8 +168,6 @@ public class TestZookeeperWatch {
             public void process(WatchedEvent event) {
 
                 System.out.println(event.getPath()+"发生了以下事件:"+event.getType());
-
-                System.out.println(Thread.currentThread().getName()+"---->我还活着......");
 
                 try {
                     //递归调用

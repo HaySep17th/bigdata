@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class TestZookeeper {
 
-    private String connectString = "hp1:2181,hp2:2181";
+    private String connectString = "hp1:2181,hp2:2181,hp3:2181";
     private int sessionTimeOut = 6000;
     private ZooKeeper zooKeeper;
 
@@ -51,7 +51,7 @@ public class TestZookeeper {
 
         Stat stat = new Stat();
 
-        List<String> children = zooKeeper.getChildren("/ideaZK", null, stat);
+        List<String> children = zooKeeper.getChildren("/", null, stat);
 
         System.out.println(children);
 
